@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "NodeJS wrapper for mongoimport",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
