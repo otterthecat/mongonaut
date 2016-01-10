@@ -3,7 +3,6 @@
 // assertion library
 // /////////////////////////////////////////////////////////
 var chai = require('chai');
-var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 chai.should();
 chai.use(sinonChai);
@@ -23,13 +22,13 @@ let fakeTarget = 'fake.json';
 let query = require('../../lib/query');
 
 describe('query', function () {
-  it('should generate query string', function (){
+  it('should generate query string', function () {
     let returnValue = query.call(configMock, fakeTarget);
-    returnValue.should.contain('-db ' + configMock.db);
-    returnValue.should.contain('-u ' + configMock.user);
-    returnValue.should.contain('-p ' + configMock.pwd);
-    returnValue.should.contain('--authenticationDatabase', + configMock.db);
-    returnValue.should.contain('--collection ' + configMock.collection);
-    returnValue.should.contain(fakeTarget + ' --jsonArray');
+    returnValue.should.contain(`-db ${configMock.db}`);
+    returnValue.should.contain(`-u ${configMock.user}`);
+    returnValue.should.contain(`-p ${configMock.pwd}`);
+    returnValue.should.contain(`--authenticationDatabase ${configMock.db}`);
+    returnValue.should.contain(`--collection ${configMock.collection}`);
+    returnValue.should.contain(`${fakeTarget} --jsonArray`);
   });
 });
