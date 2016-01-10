@@ -56,3 +56,4 @@ nbproject/*
 #####################
 reports/
 metrics/
+coverage/

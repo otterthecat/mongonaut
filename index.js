@@ -23,7 +23,7 @@ Mongonaut.prototype = {
   },
 
   'set': function (prop, val) {
-    if (!typeof defaults[prop] === 'undefined') {
+    if (typeof defaults[prop] !== 'undefined') {
       this.config[prop] = val;
       return this;
     }
