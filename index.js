@@ -5,12 +5,14 @@ let query = require('./lib/query');
 
 let Mongonaut = function (options) {
   this.config = Object.assign(defaults, options);
+  this.exec = exec;
+  this.query = query;
 };
 
 Mongonaut.prototype = {
   'import': function (target) {
-    return new Promise (function (reject, resolve) {
-      exec(query.call(this.config, target), function (err, stdout, stderr) {
+    return new Promise ((reject, resolve) => {
+      this.exec(this.query(target), (err, stdout, stderr) => {
         if (err) {
           reject(err);
         }
@@ -19,7 +21,7 @@ Mongonaut.prototype = {
           'stderr': stderr
         });
       });
-    }.bind(this));
+    });
   },
 
   'set': function (prop, val) {

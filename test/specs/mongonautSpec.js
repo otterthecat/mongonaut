@@ -9,18 +9,6 @@ chai.should();
 chai.use(sinonChai);
 
 // mock data
-let config = {
-  'device': '1234',
-  'token': 'abcd'
-};
-
-// modules to test
-// /////////////////////////////////////////////////////////
-let Mongonaut = require('../../index');
-let query = require('../../lib/query');
-let defaults = require('../../lib/defaults');
-
-let mongonaut;
 let configMock = {
   'user': 'tomservo',
   'pwd': 'lemur',
@@ -28,9 +16,17 @@ let configMock = {
   'collection': 'mads'
 };
 
+// modules to test
+// /////////////////////////////////////////////////////////
+let Mongonaut = require('../../index');
+let mongonaut;
+
 describe('Mongonaut', function () {
   beforeEach(function () {
     mongonaut = new Mongonaut(configMock);
+    sinon.spy(mongonaut, 'exec');
+    sinon.stub(mongonaut, 'query');
+    mongonaut.query.returns('query-string');
   });
 
   afterEach(function () {
@@ -72,8 +68,15 @@ describe('Mongonaut', function () {
       });
     });
 
-    describe('#import()', function() {
-
+    describe('#import()', function () {
+      it('should return a promise', function () {
+        let returnValue = mongonaut.import();
+        returnValue.should.be.an.instanceOf(Promise);
+      });
+      it('should execute valid string', function () {
+        mongonaut.import();
+        mongonaut.exec.should.have.been.calledWithMatch('query-string');
+      });
     });
   });
 });
