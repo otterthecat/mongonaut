@@ -1,5 +1,6 @@
 node_modules/
 metrics/
+converage/
 test/
 gulp/
 gulpfile.js
