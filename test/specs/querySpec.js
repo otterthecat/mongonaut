@@ -9,10 +9,12 @@ chai.use(sinonChai);
 
 // mock data
 let configMock = {
-  'user': 'tomservo',
-  'pwd': 'lemur',
-  'db': 'deep13',
-  'collection': 'mads'
+  'config': {
+    'user': 'tomservo',
+    'pwd': 'lemur',
+    'db': 'deep13',
+    'collection': 'mads'
+  }
 };
 
 let fakeTarget = 'fake.json';
@@ -24,11 +26,11 @@ let query = require('../../lib/query');
 describe('query', function () {
   it('should generate query string', function () {
     let returnValue = query.call(configMock, fakeTarget);
-    returnValue.should.contain(`-db ${configMock.db}`);
-    returnValue.should.contain(`-u ${configMock.user}`);
-    returnValue.should.contain(`-p ${configMock.pwd}`);
-    returnValue.should.contain(`--authenticationDatabase ${configMock.db}`);
-    returnValue.should.contain(`--collection ${configMock.collection}`);
+    returnValue.should.contain(`--db ${configMock.config.db}`);
+    returnValue.should.contain(`-u ${configMock.config.user}`);
+    returnValue.should.contain(`-p ${configMock.config.pwd}`);
+    returnValue.should.contain(`--authenticationDatabase ${configMock.config.db}`);
+    returnValue.should.contain(`--collection ${configMock.config.collection}`);
     returnValue.should.contain(`${fakeTarget} --jsonArray`);
   });
 });
