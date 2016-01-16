@@ -28,8 +28,8 @@ mongonaut.import('./data.json')
 
 **returns:** mongonaut
 
-### .import(jsonFile)
-**jsonFile:** The JSON file containing the data you wish to [import to MongoDB](https://docs.mongodb.org/manual/reference/program/mongoimport/).
+### .import(targetFile)
+**targetFile:** The file (.json, .csv, or .tsv) containing the data you wish to [import to MongoDB](https://docs.mongodb.org/manual/reference/program/mongoimport/).
 
 **returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
