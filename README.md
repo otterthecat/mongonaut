@@ -40,6 +40,18 @@ mongonaut.import('./data.json')
 **returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 
+## Changelog
+**v1.1.0**
+* Can now import CSV and TSV files [enchancement/1](https://github.com/otterthecat/mongonaut/issues/1)
+* #set() function can either accept key/value arguments, or a config object [enhancement/2](https://github.com/otterthecat/mongonaut/issues/2)
+* Bugfix [bug/4](https://github.com/otterthecat/mongonaut/issues/4)
+
+**v1.0.1**
+* fixed typo in .npmignore
+
+**v1.0.0**
+* Initial release
+
 ## Run Tests
 In a terminal:
 ```javascript

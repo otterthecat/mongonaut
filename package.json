@@ -1,6 +1,6 @@
 {
   "name": "mongonaut",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "NodeJS wrapper for mongoimport",
   "homepage": "https://github.com/otterthecat/mongonaut",
   "bugs": "https://github.com/otterthecat/mongonaut/issues",
