@@ -38,6 +38,7 @@ describe('query', function () {
       returnValue.should.contain(`--collection ${configMock.config.collection}`);
       returnValue.should.contain('--type json');
       returnValue.should.not.contain('--headerline');
+      returnValue.should.contain('--jsonArray');
       returnValue.should.contain(`--file ${fakeJson}`);
     });
   });
