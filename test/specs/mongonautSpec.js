@@ -16,6 +16,13 @@ let configMock = {
   'collection': 'mads'
 };
 
+let setMock = {
+  'user': 'dr. f',
+  'pwd': 'deep hurting',
+  'db': 'frank',
+  'collection': 'torgo'
+};
+
 // modules to test
 // /////////////////////////////////////////////////////////
 let Mongonaut = require('../../index');
@@ -42,16 +49,30 @@ describe('Mongonaut', function () {
     });
 
     describe('#set()', function () {
-      describe('when passed a property that does not exist in mongonaut.config', function () {
-        it('should not apply the new property name', function () {
-          mongonaut.set('foo', 'bar');
-          let typeValue = typeof mongonaut.config.foo;
-          typeValue.should.eql('undefined');
+      describe('when passed an object', function () {
+        it('should apply valid propeties to mongonaut.config', function () {
+          mongonaut.set(setMock);
+          mongonaut.config.user.should.eql(setMock.user);
+          mongonaut.config.db.should.eql(setMock.db);
         });
+      });
 
-        it('should return false if passed property does not exist in internal config', function () {
-          let returnValue = mongonaut.set('foo', 'bar');
-          returnValue.should.be.false;
+      describe('when not passed a strig or object', function () {
+        it('should return an error', function () {
+          let returnValue = mongonaut.set(1, 2);
+          returnValue.should.be.an.instanceOf(Error);
+        });
+      });
+
+      describe('when passed a property that does not exist in mongonaut.config', function () {
+        it('should throw an error if passed property does not exist in internal config', function () {
+          try {
+            let returnValue = mongonaut.set('foo', 'bar');
+            returnValue.should.be.an.instanceOf(Error);
+          }
+          catch (e) {
+            e.should.be.an.instanceOf(Error);
+          }
         });
       });
 

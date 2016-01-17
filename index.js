@@ -4,7 +4,8 @@ let defaults = require('./lib/defaults');
 let query = require('./lib/query');
 
 let Mongonaut = function (options) {
-  this.config = Object.assign(defaults, options);
+  this.config = Object.assign(defaults(), options);
+  Object.seal(this.config);
   this.exec = exec;
   this.query = query;
 };
@@ -24,12 +25,17 @@ Mongonaut.prototype = {
     });
   },
 
-  'set': function (prop, val) {
-    if (typeof defaults[prop] !== 'undefined') {
-      this.config[prop] = val;
+  'set': function () {
+    if (typeof arguments[0] === 'object') {
+      this.config = Object.assign(this.config, arguments[0]);
       return this;
     }
-    return false;
+    else if (typeof arguments[0] === 'string' && typeof arguments[1] === 'string') {
+      this.config[arguments[0]] = arguments[1];
+      return this;
+    }
+
+    return new Error('Invalid argument(s)');
   }
 };
 
