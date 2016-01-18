@@ -41,9 +41,12 @@ mongonaut.import('./data.json')
 
 
 ## Changelog
+**v1.1.1**
+* Config property is now sealed before options are applied during instantiation.[bug/7](https://github.com/otterthecat/mongonaut/issues/7)
+
 **v1.1.0**
 * Can now import CSV and TSV files [enchancement/1](https://github.com/otterthecat/mongonaut/issues/1)
-* #set() function can either accept key/value arguments, or a config object [enhancement/2](https://github.com/otterthecat/mongonaut/issues/2)
+* .set() function can either accept key/value arguments, or a config object [enhancement/2](https://github.com/otterthecat/mongonaut/issues/2)
 * Bugfix [bug/4](https://github.com/otterthecat/mongonaut/issues/4)
 
 **v1.0.1**
