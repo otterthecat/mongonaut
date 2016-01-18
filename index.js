@@ -5,7 +5,6 @@ let query = require('./lib/query');
 
 let Mongonaut = function (options) {
   this.config = Object.assign(defaults(), options);
-  Object.seal(this.config);
   this.exec = exec;
   this.query = query;
 };
