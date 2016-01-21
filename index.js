@@ -2,6 +2,7 @@
 let exec = require('child_process').exec;
 let defaults = require('./lib/defaults');
 let query = require('./lib/query');
+let importScript = require('./lib/importScript');
 
 let Mongonaut = function (options) {
   this.config = Object.assign(defaults(), options);
@@ -11,17 +12,17 @@ let Mongonaut = function (options) {
 
 Mongonaut.prototype = {
   'import': function (target) {
-    return new Promise ((resolve, reject) => {
-      this.exec(this.query(target), (err, stdout, stderr) => {
-        if (err) {
-          reject(err);
-        }
-        resolve.call(this, {
-          'stdout': stdout,
-          'stderr': stderr
-        });
+    let promiseList = [];
+    if (typeof target === 'string') {
+      promiseList.push(importScript.call(this, target));
+    }
+    else if (Array.isArray(target)) {
+      target.forEach((item) => {
+        promiseList.push(importScript.call(this, item));
       });
-    });
+    }
+
+    return Promise.all(promiseList);
   },
 
   'set': function () {

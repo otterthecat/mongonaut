@@ -95,7 +95,7 @@ describe('Mongonaut', function () {
         returnValue.should.be.an.instanceOf(Promise);
       });
       it('should execute valid string', function () {
-        mongonaut.import();
+        mongonaut.import(mongonaut.query());
         mongonaut.exec.should.have.been.calledWithMatch('query-string');
       });
     });
