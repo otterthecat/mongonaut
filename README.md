@@ -55,6 +55,12 @@ as the `stdout` and `stderr` values.
 
 
 ## Changelog
+**v2.0.2**
+* updated changelog
+
+**v2.0.1**
+* bumped version in package.json
+
 **v2.0.0**
 * `.import()` function can be passed either a string of the path to a single JSON file, or an array of strings each pointing to a JSON file to be imported.
 [enhancement/9](https://github.com/otterthecat/mongonaut/issues/9)
