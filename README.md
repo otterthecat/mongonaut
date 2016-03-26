@@ -26,7 +26,9 @@ mongonaut.set('collection', 'inventions');
 ```
 
 ### Constructor(config)
-**config:** object to apply configuration data. Available keys are `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB
+**config:** object to apply configuration data. Available keys are `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB.
+
+If authentication is not desired, then simply omit setting both `user` and `pwd`, or in the case of changing settings from using authentication to omitting authtentication, set both `user` and `pwd` to empty strings.
 
 **returns:** Mongonaut instance.
 
@@ -36,7 +38,10 @@ mongonaut.set('collection', 'inventions');
 
 **val:** desired value of `mongonaut.config[key]`
 
-**config** object to apply configuration data. Available keys are `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB
+**config** object to apply configuration data. Available keys are `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB.
+
+Remember, both `user` and `pwd` must both either be set (for authentication), or set as the default/empty strings (for no authentication). Setting only one or the other
+will result in an error when you call `.import()`.
 
 **note** trying to set a key other than `user`, `pwd`, `db` or `collection` will result in an error.
 
@@ -55,6 +60,12 @@ as the `stdout` and `stderr` values.
 
 
 ## Changelog
+**v2.1.0**
+ * [enhancement/11](https://github.com/otterthecat/mongonaut/issues/11)
+  * If `user` and `pwd` configs are BOTH not set, then the mongo query will not
+invoke authentication.
+  * If a `user` config is set without a `pwd`, or vice versa, an error will be thrown.
+
 **v2.0.2**
 * updated changelog
 
@@ -62,18 +73,21 @@ as the `stdout` and `stderr` values.
 * bumped version in package.json
 
 **v2.0.0**
-* `.import()` function can be passed either a string of the path to a single JSON file, or an array of strings each pointing to a JSON file to be imported.
-[enhancement/9](https://github.com/otterthecat/mongonaut/issues/9)
+* [enhancement/9](https://github.com/otterthecat/mongonaut/issues/9)
+  * `.import()` function can be passed either a string of the path to a single JSON file, or an array of strings each pointing to a JSON file to be imported.
 
 * **breaking change** the returned promise from `.import()` resolving callback
 is now passed an array instead of an object.
 
 **v1.1.1**
-* Config property is now sealed before options are applied during instantiation.[bug/7](https://github.com/otterthecat/mongonaut/issues/7)
+* [bug/7](https://github.com/otterthecat/mongonaut/issues/7)
+  * Config property is now sealed before options are applied during instantiation.
 
 **v1.1.0**
-* Can now import CSV and TSV files [enchancement/1](https://github.com/otterthecat/mongonaut/issues/1)
-* `.set()` function can either accept key/value arguments, or a config object [enhancement/2](https://github.com/otterthecat/mongonaut/issues/2)
+* [enchancement/1](https://github.com/otterthecat/mongonaut/issues/1)
+  * `.set()` function can either accept key/value arguments, or a config object
+* [enhancement/2](https://github.com/otterthecat/mongonaut/issues/2)
+  * Can now import CSV and TSV files
 * Bugfix [bug/4](https://github.com/otterthecat/mongonaut/issues/4)
 
 **v1.0.1**

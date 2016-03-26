@@ -18,6 +18,33 @@ let configMock = {
   }
 };
 
+let noAuthMock = {
+  'config': {
+    'user': '',
+    'pwd': '',
+    'db': 'sol',
+    'collection': 'bots'
+  }
+};
+
+let incompleteMock1 = {
+  'config': {
+    'user': 'foo',
+    'pwd': '',
+    'db': 'deep13',
+    'colelction': 'mads'
+  }
+};
+
+let incompleteMock2 = {
+  'config': {
+    'user': '',
+    'pwd': 'foo',
+    'db': 'deep13',
+    'colelction': 'mads'
+  }
+};
+
 let fakeJson = 'fake.json';
 let fakeCsv = 'fake.csv';
 let fakeTsv = 'fake.tsv';
@@ -40,6 +67,25 @@ describe('query', function () {
       returnValue.should.not.contain('--headerline');
       returnValue.should.contain('--jsonArray');
       returnValue.should.contain(`--file ${fakeJson}`);
+    });
+  });
+
+  describe ('when no authentication is set', function () {
+    it('should create query without authentication params', function () {
+      let returnValue = query.call(noAuthMock, fakeJson);
+      returnValue.should.not.contain('-p');
+      returnValue.should.not.contain('-u');
+      returnValue.should.not.contain('--authenticationDatabase');
+    });
+  });
+
+  describe('when only a user or pwd is set', function () {
+    it('should throw an error if missing a pwd', function () {
+      expect(query.bind(incompleteMock1, fakeJson)).to.throw('Missing user name or password');
+    });
+
+    it('should throw an error if missing a user', function () {
+      expect(query.bind(incompleteMock2, fakeJson)).to.throw('Missing user name or password');
     });
   });
 
