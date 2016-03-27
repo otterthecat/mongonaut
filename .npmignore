@@ -1,8 +1,0 @@
-node_modules/
-metrics/
-coverage/
-test/
-gulp/
-gulpfile.js
-*.sublime-project
-*.sublime-workspace
