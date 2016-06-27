@@ -2,27 +2,24 @@
 let exec = require('child_process').exec;
 let defaults = require('./lib/defaults');
 let query = require('./lib/query');
-let importScript = require('./lib/importScript');
+let helpers = require('./lib/helpers');
+let runDbAction = helpers.runQueryAction;
+let getDbQuery = helpers.getDbQuery;
 
 let Mongonaut = function (options) {
   this.config = Object.assign(defaults(), options);
   this.exec = exec;
   this.query = query;
+  this.runDbAction = runDbAction.bind(this);
 };
 
 Mongonaut.prototype = {
-  'import': function (target) {
-    let promiseList = [];
-    if (typeof target === 'string') {
-      promiseList.push(importScript.call(this, target));
-    }
-    else if (Array.isArray(target)) {
-      target.forEach((item) => {
-        promiseList.push(importScript.call(this, item));
-      });
-    }
+  'import': function (files) {
+    return this.runDbAction(getDbQuery('import'), files);
+  },
 
-    return Promise.all(promiseList);
+  'export': function (collections) {
+    return this.runDbAction(getDbQuery('export'), collections);
   },
 
   'set': function () {

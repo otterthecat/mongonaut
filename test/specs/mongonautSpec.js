@@ -32,11 +32,12 @@ describe('Mongonaut', function () {
   beforeEach(function () {
     mongonaut = new Mongonaut(configMock);
     sinon.spy(mongonaut, 'exec');
-    sinon.stub(mongonaut, 'query');
-    mongonaut.query.returns('query-string');
+    sinon.stub(mongonaut.query, 'import');
+    mongonaut.query.import.returns('query-string');
   });
 
   afterEach(function () {
+    mongonaut.query.import.restore();
     mongonaut = null;
   });
 
@@ -95,7 +96,7 @@ describe('Mongonaut', function () {
         returnValue.should.be.an.instanceOf(Promise);
       });
       it('should execute valid string', function () {
-        mongonaut.import(mongonaut.query());
+        mongonaut.import(mongonaut.query.import());
         mongonaut.exec.should.have.been.calledWithMatch('query-string');
       });
     });
