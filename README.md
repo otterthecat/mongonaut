@@ -23,6 +23,12 @@ mongonaut.set('collection', 'inventions');
   .then(function (response) {
       // code to fire on Promise resolve
   });
+
+// export "inventions" collection to a json file
+mongonaut.export()
+  .then(function (returnedCollections){
+    // code to execute on Promise resolve
+  });
 ```
 
 ### Constructor(config)
@@ -56,6 +62,18 @@ will result in an error when you call `.import()`.
 **returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Resolving callback will be passed an array of objects (1 for each file originally imported) that contain the `file` that was imported, as well
+as the `stdout` and `stderr` values.
+
+### .export(collectionString OR [collectionStringArray])
+**collectionString:** Name of a collection within the database set by the `db` property of a mongonaut instance
+
+**[collectionStringArray]:** An array of strings that each match the name of a collection within the `db` property of the mongonaut instance.
+
+Note that an argument for `.export()` is optional, and will default to the collection set within the instnace's configured `collection` property.
+
+**returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+Resolving callback will be passed an array of objects (1 for each collection originally exported) that contain the `collection` that was exported, as well
 as the `stdout` and `stderr` values.
 
 ## Run Tests

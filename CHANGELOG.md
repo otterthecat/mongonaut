@@ -1,4 +1,13 @@
 # Changelog
+## v2.2.1
+ * Added missing docs in README
+
+## v2.2.0
+ * [enhancement/13](https://github.com/otterthecat/mongonaut/issues/13)
+  * created export feature
+ * [clean-up/14](https://github.com/otterthecat/mongonaut/issues/14)
+  * moved release notes to own file
+
 ## v2.1.0
  * [enhancement/11](https://github.com/otterthecat/mongonaut/issues/11)
   * If `user` and `pwd` configs are BOTH not set, then the mongo query will not
