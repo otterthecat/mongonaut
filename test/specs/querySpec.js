@@ -14,7 +14,8 @@ let configMock = {
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
-    'collection': 'mads'
+    'collection': 'mads',
+    'jsonArray': true
   }
 };
 
