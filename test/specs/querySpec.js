@@ -117,14 +117,14 @@ describe('#import', function () {
   describe('when passed an upsertfield', function () {
     it('should generate query with an upsertfield set', function () {
       let returnValue = imp.call(configUpsertMock, fakeJson);
-      returnValue.should.contain('--upsertfields field1');
+      returnValue.should.contain('--upsertFields field1');
     });
   });
 
   describe('when passed multiple upsertfield', function () {
     it('should generate query with multiple upsertfields set', function () {
       let returnValue = imp.call(configMultipleUpsertMock, fakeJson);
-      returnValue.should.contain('--upsertfields field1,field2,field3');
+      returnValue.should.contain('--upsertFields field1,field2,field3');
     });
   });
 
