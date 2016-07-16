@@ -15,7 +15,29 @@ let configMock = {
     'pwd': 'lemur',
     'db': 'deep13',
     'collection': 'mads',
-    'jsonArray': true
+    'jsonArray': true,
+  }
+};
+
+let configUpsertMock = {
+  'config': {
+    'user': 'tomservo',
+    'pwd': 'lemur',
+    'db': 'deep13',
+    'collection': 'mads',
+    'jsonArray': true,
+    'upsertFields':['field1']
+  }
+};
+
+let configMultipleUpsertMock = {
+  'config': {
+    'user': 'tomservo',
+    'pwd': 'lemur',
+    'db': 'deep13',
+    'collection': 'mads',
+    'jsonArray': true,
+    'upsertFields':['field1', 'field2', 'field3']
   }
 };
 
@@ -55,7 +77,7 @@ let fakeBadFile = 'fake.jpg';
 // /////////////////////////////////////////////////////////
 let q = require('../../lib/query');
 let imp = q.import;
-let exp = q.export
+let exp = q.export;
 
 describe('#import', function () {
   describe('when passed a JSON file path', function () {
@@ -89,6 +111,20 @@ describe('#import', function () {
 
     it('should throw an error if missing a user', function () {
       expect(imp.bind(incompleteMock2, fakeJson)).to.throw('Missing user name or password');
+    });
+  });
+
+  describe('when passed an upsertfield', function () {
+    it('should generate query with an upsertfield set', function () {
+      let returnValue = imp.call(configUpsertMock, fakeJson);
+      returnValue.should.contain('--upsertfields field1');
+    });
+  });
+
+  describe('when passed multiple upsertfield', function () {
+    it('should generate query with multiple upsertfields set', function () {
+      let returnValue = imp.call(configMultipleUpsertMock, fakeJson);
+      returnValue.should.contain('--upsertfields field1,field2,field3');
     });
   });
 
