@@ -1,4 +1,10 @@
 # Changelog
+## v2.3.0
+ * [enhancement/16](https://github.com/otterthecat/mongonaut/issues/16)
+  * allow for importing non-standard, MongoDB flabvored JSON
+ * [enhancement/17](https://github.com/otterthecat/mongonaut/issues/17)
+  * add config option for `upsertfields`
+
 ## v2.2.1
  * Added missing docs in README
 
