@@ -11,6 +11,7 @@ chai.use(sinonChai);
 // mock data
 let configMock = {
   'config': {
+    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -21,6 +22,7 @@ let configMock = {
 
 let configUpsertMock = {
   'config': {
+    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -32,6 +34,7 @@ let configUpsertMock = {
 
 let configMultipleUpsertMock = {
   'config': {
+    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -43,6 +46,7 @@ let configMultipleUpsertMock = {
 
 let noAuthMock = {
   'config': {
+    'host': 'localhost',
     'user': '',
     'pwd': '',
     'db': 'sol',
@@ -52,6 +56,7 @@ let noAuthMock = {
 
 let incompleteMock1 = {
   'config': {
+    'host': 'localhost',
     'user': 'foo',
     'pwd': '',
     'db': 'deep13',
@@ -61,6 +66,7 @@ let incompleteMock1 = {
 
 let incompleteMock2 = {
   'config': {
+    'host': 'localhost',
     'user': '',
     'pwd': 'foo',
     'db': 'deep13',
@@ -83,6 +89,7 @@ describe('#import', function () {
   describe('when passed a JSON file path', function () {
     it('should generate query string to import JSON file', function () {
       let returnValue = imp.call(configMock, fakeJson);
+      returnValue.should.contain(`--host ${configMock.config.host}`);
       returnValue.should.contain(`--db ${configMock.config.db}`);
       returnValue.should.contain(`-u ${configMock.config.user}`);
       returnValue.should.contain(`-p ${configMock.config.pwd}`);
