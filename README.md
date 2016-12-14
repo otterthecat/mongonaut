@@ -4,6 +4,7 @@ NodeJS module that totally Promises to import your JSON, CSV or TSV files to Mon
 ## Usage
 ```javascript
 let mongonaut = new Mongonaut({
+  'host': 'localhost',
   'user': 'tomservo',
   'pwd': 'sol',
   'db': 'experiments',
@@ -32,7 +33,7 @@ mongonaut.export()
 ```
 
 ### Constructor(config)
-**config:** object to apply configuration data. Available keys are `user`, `pwd`, `db`, `collection` which are used to authenticate with MongoDB, as well as options `jsonArray` - set as `false` if you want to use MongoDB's [JSON format](http://zaiste.net/2012/08/importing_json_into_mongodb/). (by default, *Mongonaut* will expect valid JSON files),
+**config:** object to apply configuration data. Available keys are `host`, `user`, `pwd`, `db`, `collection` which are used to authenticate with MongoDB, as well as options `jsonArray` - set as `false` if you want to use MongoDB's [JSON format](http://zaiste.net/2012/08/importing_json_into_mongodb/). (by default, *Mongonaut* will expect valid JSON files),
 and `upsertFields` if you need to [specify fields](https://docs.mongodb.com/manual/reference/program/mongoimport/#cmdoption--upsertFields)
 
 If authentication is not desired, then simply omit setting both `user` and `pwd`, or in the case of changing settings from using authentication to omitting authtentication, set both `user` and `pwd` to empty strings.
@@ -45,7 +46,7 @@ If authentication is not desired, then simply omit setting both `user` and `pwd`
 
 **val:** desired value of `mongonaut.config[key]`
 
-**config** object to apply configuration data. Available keys are `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB.
+**config** object to apply configuration data. Available keys are `host`, `user`, `pwd`, `db`, and `collection` which are used to authenticate with MongoDB.
 
 If you intend to use [MongoDB's default JSON formatting](http://zaiste.net/2012/08/importing_json_into_mongodb/), then set `jsonArray` to false.
 
@@ -54,7 +55,7 @@ You can set `upsertFields` if you intend to specify specific fields for your que
 Remember, both `user` and `pwd` must both either be set (for authentication), or set as the default/empty strings (for no authentication). Setting only one or the other
 will result in an error when you call `.import()`.
 
-**note** trying to set a key other than `user`, `pwd`, `db` or `collection` will result in an error.
+**note** trying to set a key other than `host`, `user`, `pwd`, `db` or `collection` will result in an error.
 
 **returns:** mongonaut
 
