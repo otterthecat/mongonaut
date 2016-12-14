@@ -10,6 +10,7 @@ chai.use(sinonChai);
 
 // mock data
 let configMock = {
+  'host': 'localhost',
   'user': 'tomservo',
   'pwd': 'lemur',
   'db': 'deep13',
@@ -17,6 +18,7 @@ let configMock = {
 };
 
 let setMock = {
+  'host': 'localhost',
   'user': 'dr. f',
   'pwd': 'deep hurting',
   'db': 'frank',
@@ -43,6 +45,7 @@ describe('Mongonaut', function () {
 
   describe('instnace', function () {
     it('should apply passed object to internal config property', function () {
+      mongonaut.config.host.should.eql(configMock.host);
       mongonaut.config.user.should.eql(configMock.user);
       mongonaut.config.pwd.should.eql(configMock.pwd);
       mongonaut.config.db.should.eql(configMock.db);
@@ -53,6 +56,7 @@ describe('Mongonaut', function () {
       describe('when passed an object', function () {
         it('should apply valid propeties to mongonaut.config', function () {
           mongonaut.set(setMock);
+          mongonaut.config.host.should.eql(configMock.host);
           mongonaut.config.user.should.eql(setMock.user);
           mongonaut.config.db.should.eql(setMock.db);
         });
