@@ -11,7 +11,6 @@ chai.use(sinonChai);
 // mock data
 let configMock = {
   'config': {
-    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -22,7 +21,6 @@ let configMock = {
 
 let configUpsertMock = {
   'config': {
-    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -56,7 +54,6 @@ let noAuthMock = {
 
 let incompleteMock1 = {
   'config': {
-    'host': 'localhost',
     'user': 'foo',
     'pwd': '',
     'db': 'deep13',
@@ -66,7 +63,6 @@ let incompleteMock1 = {
 
 let incompleteMock2 = {
   'config': {
-    'host': 'localhost',
     'user': '',
     'pwd': 'foo',
     'db': 'deep13',
