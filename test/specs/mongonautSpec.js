@@ -10,17 +10,33 @@ chai.use(sinonChai);
 
 // mock data
 let configMock = {
+  'host': 'localhost',
   'user': 'tomservo',
   'pwd': 'lemur',
   'db': 'deep13',
   'collection': 'mads'
 };
 
+let configMockNoHost = {
+    'user': 'tomservo',
+    'pwd': 'lemur',
+    'db': 'deep13',
+    'collection': 'mads'
+};
+
 let setMock = {
+  'host': 'localhost',
   'user': 'dr. f',
   'pwd': 'deep hurting',
   'db': 'frank',
   'collection': 'torgo'
+};
+
+let setMockNoHost = {
+    'user': 'dr. f',
+    'pwd': 'deep hurting',
+    'db': 'frank',
+    'collection': 'torgo'
 };
 
 // modules to test
@@ -41,24 +57,44 @@ describe('Mongonaut', function () {
     mongonaut = null;
   });
 
-  describe('instnace', function () {
+  describe('instance', function () {
     it('should apply passed object to internal config property', function () {
+      mongonaut.config.host.should.eql(configMock.host);
       mongonaut.config.user.should.eql(configMock.user);
       mongonaut.config.pwd.should.eql(configMock.pwd);
       mongonaut.config.db.should.eql(configMock.db);
       mongonaut.config.collection.should.eql(configMock.collection);
     });
 
-    describe('#set()', function () {
-      describe('when passed an object', function () {
-        it('should apply valid propeties to mongonaut.config', function () {
-          mongonaut.set(setMock);
-          mongonaut.config.user.should.eql(setMock.user);
-          mongonaut.config.db.should.eql(setMock.db);
+    describe('when no host set default', function () {
+        it('should apply passed object to internal config property', function () {
+            mongonaut.config.user.should.eql(configMockNoHost.user);
+            mongonaut.config.pwd.should.eql(configMockNoHost.pwd);
+            mongonaut.config.db.should.eql(configMockNoHost.db);
+            mongonaut.config.collection.should.eql(configMockNoHost.collection);
         });
+    });
+
+    describe('#set()', function () {
+
+      describe('when passed an object', function () {
+          it('should apply valid propeties to mongonaut.config', function () {
+              mongonaut.set(setMock);
+              mongonaut.config.host.should.eql(setMock.host);
+              mongonaut.config.user.should.eql(setMock.user);
+              mongonaut.config.db.should.eql(setMock.db);
+          });
       });
 
-      describe('when not passed a strig or object', function () {
+      describe('when no host set default', function () {
+          it('should apply valid propeties to mongonaut.config', function () {
+              mongonaut.set(setMock);
+              mongonaut.config.user.should.eql(setMockNoHost.user);
+              mongonaut.config.db.should.eql(setMockNoHost.db);
+          });
+      });
+
+      describe('when not passed a string or object', function () {
         it('should return an error', function () {
           let returnValue = mongonaut.set(1, 2);
           returnValue.should.be.an.instanceOf(Error);
@@ -88,6 +124,7 @@ describe('Mongonaut', function () {
           returnValue.should.equal(mongonaut);
         });
       });
+
     });
 
     describe('#import()', function () {

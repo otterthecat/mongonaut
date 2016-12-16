@@ -32,6 +32,7 @@ let configUpsertMock = {
 
 let configMultipleUpsertMock = {
   'config': {
+    'host': 'localhost',
     'user': 'tomservo',
     'pwd': 'lemur',
     'db': 'deep13',
@@ -43,6 +44,7 @@ let configMultipleUpsertMock = {
 
 let noAuthMock = {
   'config': {
+    'host': 'localhost',
     'user': '',
     'pwd': '',
     'db': 'sol',
@@ -83,6 +85,7 @@ describe('#import', function () {
   describe('when passed a JSON file path', function () {
     it('should generate query string to import JSON file', function () {
       let returnValue = imp.call(configMock, fakeJson);
+      returnValue.should.contain(`--host ${configMock.config.host}`);
       returnValue.should.contain(`--db ${configMock.config.db}`);
       returnValue.should.contain(`-u ${configMock.config.user}`);
       returnValue.should.contain(`-p ${configMock.config.pwd}`);
