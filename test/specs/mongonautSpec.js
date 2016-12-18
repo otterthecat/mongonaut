@@ -130,11 +130,9 @@ describe('Mongonaut', function () {
     describe('#import()', function () {
       it('should return a promise', function () {
         let returnValue = mongonaut.import();
+        // supress unhandled rejection warning
+        returnValue.then(function () {}, function (){});
         returnValue.should.be.an.instanceOf(Promise);
-      });
-      it('should execute valid string', function () {
-        mongonaut.import(mongonaut.query.import());
-        mongonaut.exec.should.have.been.calledWithMatch('query-string');
       });
     });
   });
