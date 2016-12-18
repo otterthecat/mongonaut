@@ -1,39 +1,26 @@
-'use strict';
-let exec = require('child_process').exec;
-let defaults = require('./lib/defaults');
-let query = require('./lib/query');
-let helpers = require('./lib/helpers');
-let runDbAction = helpers.runQueryAction;
-let getDbQuery = helpers.getDbQuery;
+'use strict'
+
+const SPAWN = require('child_process').spawn
+const DEFAULTS = require('./lib/defaults')()
+const QUERY = require('./lib/query')
 
 let Mongonaut = function (options) {
-  this.config = Object.assign(defaults(), options);
-  this.exec = exec;
-  this.query = query;
-  this.runDbAction = runDbAction.bind(this);
-};
+  this.config = Object.assign(DEFAULTS, options)
+  this.allowedFileTypes = new Set(['json', 'csv', 'tsv'])
+}
 
 Mongonaut.prototype = {
-  'import': function (files) {
-    return this.runDbAction(getDbQuery('import'), files);
+  'import': function (file) {
+    return SPAWN('mongoimport', QUERY['import'](this.config).split(' '))
   },
 
-  'export': function (collections) {
-    return this.runDbAction(getDbQuery('export'), collections);
+  'export': function (collection) {
+    return SPAWN('mongoexport', QUERY['export'](this.config).split(' '))
   },
 
   'set': function () {
-    if (typeof arguments[0] === 'object') {
-      this.config = Object.assign(this.config, arguments[0]);
-      return this;
-    }
-    else if (typeof arguments[0] === 'string' && typeof arguments[1] === 'string') {
-      this.config[arguments[0]] = arguments[1];
-      return this;
-    }
 
-    return new Error('Invalid argument(s)');
   }
-};
+}
 
-module.exports = Mongonaut;
+module.exports = Mongonaut
