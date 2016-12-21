@@ -23,8 +23,8 @@ test('#import', function (t) {
 test('#export', function (t) {
   let returnValue = q.export(mockSettings)
 
-  t.regex(returnValue, /-h localhost/, 'should return string with correct host setting')
-  t.regex(returnValue, /-db ahab/, 'should return string with correct db setting')
-  t.regex(returnValue, /-c stuff/, 'should return string with correct collection setting')
-  t.regex(returnValue, /--jsonArray -o stuff.json/, 'should return string with correct export settings')
+  t.regex(returnValue, /-h localhost/)
+  t.regex(returnValue, /-db ahab/)
+  t.regex(returnValue, /-c stuff/)
+  t.regex(returnValue, /--jsonArray -o stuff.json/)
 })
