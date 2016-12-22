@@ -17,7 +17,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "ava -tap test/*.js | tap-nyan"
+    "test": "nyc ava -tap --no-cache test/*.js | tap-nyan"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
   "license": "MIT",
   "devDependencies": {
     "ava": "^0.17.0",
+    "nyc": "^10.0.0",
     "tap-nyan": "^1.1.0"
   }
 }
