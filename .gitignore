@@ -57,3 +57,4 @@ nbproject/*
 reports/
 metrics/
 coverage/
+.nyc_output
