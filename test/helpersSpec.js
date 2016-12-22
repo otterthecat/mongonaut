@@ -3,25 +3,28 @@
 const test = require('ava')
 let h = require('../lib/helpers')
 
-test('#generateAuth', function (t) {
+test('generateAuth() should return empty string if no credentials are passed', function (t) {
   t.is(h.generateAuth({}), '')
+})
 
+test('generateAuth() should return auth substring when credentials are passed', function (t) {
   t.is(h.generateAuth({user: 'servo', pwd: 'crow', db: 'sol'}),
     '-u servo -p crow --authenticationDatabase sol')
 })
 
-test('#generateHeaderline', function (t) {
+test('generateHeaderline() should return headerline flag is passed non-json file', function (t) {
   t.is(h.generateHeaderline({file: 'foo.csv'}), '--headerline')
-  t.is(h.generateHeaderline({file: 'bar.json', jsonArray: true}), '--jsonArray')
-  t.is(h.generateHeaderline({file: 'baz.json'}), '')
 })
 
-test('#generateType', function (t) {
+test('generateType() should return type option based on file extension', function (t) {
   t.is(h.generateType('thing.txt'), '--type txt')
-  t.is(h.generateType('THING.TXT'), '--type txt')
+  t.is(h.generateType('THING.txt'), '--type txt')
 })
 
-test('#generateUpsertFields', function (t) {
+test('generateUpsertFields() should return empty string if passed falsy value', function (t) {
   t.is(h.generateUpsertFields(), '')
+})
+
+test('generateUpsertFields() should return upsert substring when passed array', function (t) {
   t.is(h.generateUpsertFields(['foo', 'bar']), '--upsertFields foo,bar')
 })

@@ -12,7 +12,7 @@ var mockSettings = {
   collection: 'stuff'
 }
 
-test('#import', function (t) {
+test('import() should return proper mongoimport query string', function (t) {
   let returnValue = q.import(mockSettings)
 
   t.regex(returnValue, /-h localhost/, 'should return string with correct host setting')
@@ -20,7 +20,7 @@ test('#import', function (t) {
   t.regex(returnValue, /--file foo.json/, 'should return string with correct file setting')
 })
 
-test('#export', function (t) {
+test('export() shouldreturn proper mongoexport query string', function (t) {
   let returnValue = q.export(mockSettings)
 
   t.regex(returnValue, /-h localhost/)
