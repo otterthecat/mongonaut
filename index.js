@@ -21,8 +21,8 @@ Mongonaut.prototype = {
   },
 
   'set': function (...args) {
-    if (args.length === 1 && typeof args === 'object') {
-      this.config = Object.assign(this.config, args)
+    if (args.length === 1 && typeof args[0] === 'object') {
+      this.config = Object.assign(this.config, args[0])
       return this
     } else if (args.length === 2 && typeof args[0] === 'string' && typeof args[0] === 'string') {
       this.config[args[0]] = args[1]
