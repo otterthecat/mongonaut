@@ -1,4 +1,7 @@
 # Changelog
+## v2.4.0
+ * [enhancement/22](https://github.com/otterthecat/mongonaut/issues/22)
+  * allow for host configuration
 ## v2.3.0
  * [enhancement/16](https://github.com/otterthecat/mongonaut/issues/16)
   * allow for importing non-standard, MongoDB flabvored JSON
