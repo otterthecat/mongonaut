@@ -14,6 +14,12 @@ test('generateAuth() should return auth substring when credentials are passed', 
 
 test('generateHeaderline() should return headerline flag is passed non-json file', function (t) {
   t.is(h.generateHeaderline({file: 'foo.csv'}), '--headerline')
+  t.is(h.generateHeaderline({file: 'foo.json'}), '')
+})
+
+test('generateJSONArray() should return jsonArray flag if passed truthy .jsonArray property', function (t) {
+  t.is(h.generateJSONArray({}), '')
+  t.is(h.generateJSONArray({jsonArray: true}), '--jsonArray')
 })
 
 test('generateType() should return type option based on file extension', function (t) {
