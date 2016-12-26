@@ -1,39 +1,42 @@
 'use strict'
 
 const test = require('ava')
-const cp = require('child_process')
+const Spawngo = require('spawngo')
 const sinon = require('sinon')
 
-sinon.stub(cp, 'spawn', function (action, opts) {
-  return [action, opts]
+let fakeSpawn = {
+  stderr: {
+    on: function (str, cb) {
+      cb(str)
+    }
+  },
+  on: function (str, cb) {
+    cb(0)
+  }
+}
+
+sinon.stub(Spawngo.prototype, 'import', function () {
+  return fakeSpawn
 })
+sinon.stub(Spawngo.prototype, 'export', function () {
+  return fakeSpawn
+})
+
 const Mongonaut = require('../index')
 let m = new Mongonaut()
 
-test('import() should spawn a new mongoimport process', function (t) {
-  let stubReturn = m.import('foo.json')
-  t.is(stubReturn[0], 'mongoimport')
+test('Mongonaut should be a constructor', function (t) {
+  t.is(m instanceof Mongonaut, true)
 })
 
-test('export() should spawn a new mongoexport process', function (t) {
-  let stubReturn = m.export('foo')
-  t.is(stubReturn[0], 'mongoexport')
+test('#import() should return a promise', function (t) {
+  return m.import('fake.json').then(function () {
+    t.pass()
+  })
 })
 
-test('set() should update config when passed an object ', function (t) {
-  m.set({user: 'foo', pwd: 'bar'})
-
-  t.is(m.config.user, 'foo')
-  t.is(m.config.pwd, 'bar')
-})
-
-test('set() should update config when passed key/value strings', function (t) {
-  m.set('collection', 'meh')
-
-  t.is(m.config.collection, 'meh')
-})
-
-test('set() should return an error if passed invalid data', function (t) {
-  var returnValue = m.set()
-  t.is(returnValue instanceof Error, true)
+test('#export() should return a promise', function (t) {
+  return m.export('fakeCollection').then(function () {
+    t.pass()
+  })
 })
