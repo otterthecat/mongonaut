@@ -39,6 +39,6 @@
     "tap-nyan": "^1.1.0"
   },
   "dependencies": {
-    "spawngo": "^1.0.0"
+    "spawngo": "^1.1.0"
   }
 }
