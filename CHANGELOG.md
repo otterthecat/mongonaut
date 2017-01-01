@@ -1,5 +1,7 @@
 # Changelog
 ## v3.0.0
+ * Mongonaut now extends [spawngo](https://github.com/otterthecat/spawngo) to return promises.
+
  * [enhancment/19](https://github.com/otterthecat/mongonaut/issues/19)
   * allow for `numInsertions` flag. Defaults to number of cores on current user's machine. Issue resolved with [spawngo](https://github.com/otterthecat/spawngo) repo, which mongonaut extends.
  * [enhancement/20](https://github.com/otterthecat/mongonaut/issues/20)
@@ -7,9 +9,9 @@
  * [enhancement/21](https://github.com/otterthecat/mongonaut/issues/21)
   * allow for `drop` flag configuration (defaults to false). Issue resolved with [spawngo](https://github.com/otterthecat/spawngo) repo, which mongonaut extends.
 
-* Mongonaut now extends [spawngo](https://github.com/otterthecat/spawngo) to return promises.
-* Mongonaut will no longer take an array of files directly.
-* Mongonaut's passed data object has been altered from versions previous to `3.0.0`. This is largely due to how `mongoimport` sends to `stdout` and `stderr`.
+### Breaking Changes
+ * Mongonaut will no longer take an array of files directly.
+ * Mongonaut's passed data object has been altered from versions previous to `3.0.0`. This is largely due to how `mongoimport` sends to `stdout` and `stderr`.
 
 ## v2.4.0
  * [enhancement/24](https://github.com/otterthecat/mongonaut/pull/24)
