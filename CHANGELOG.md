@@ -6,11 +6,14 @@
   * Change `exec` to `spawn` to remove buffer restriction. Issue resolved with [spawngo](https://github.com/otterthecat/spawngo) repo, which mongonaut extends.
  * [enhancement/21](https://github.com/otterthecat/mongonaut/issues/21)
   * allow for `drop` flag configuration (defaults to false). Issue resolved with [spawngo](https://github.com/otterthecat/spawngo) repo, which mongonaut extends.
+
 * Mongonaut will no longer take an array of files directly.
 * Mongonaut's passed data object has been altered from versions previous to `3.0.0`. This is largely due to how `mongoimport` sends to `stdout` and `stderr`.
+
 ## v2.4.0
  * [enhancement/24](https://github.com/otterthecat/mongonaut/pull/24)
   * allow to configure host. Default is still localhost.
+
 ## v2.3.0
  * [enhancement/16](https://github.com/otterthecat/mongonaut/issues/16)
   * allow for importing non-standard, MongoDB flabvored JSON
