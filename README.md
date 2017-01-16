@@ -4,7 +4,6 @@ NodeJS module that totally Promises to import your JSON, CSV or TSV files to Mon
 ## Usage
 ```javascript
 let mongonaut = new Mongonaut({
-  'host': 'localhost',
   'user': 'tomservo',
   'pwd': 'sol',
   'db': 'experiments',
@@ -60,27 +59,26 @@ will result in an error when you call `.import()`.
 **returns:** mongonaut
 
 
-### .import(targetfile OR [targetFiles])
+### .import(targetfile)
 **targetFile:** The file (.json, .csv, or .tsv) containing the data you wish to [import to MongoDB](https://docs.mongodb.org/manual/reference/program/mongoimport/).
-
-**[targetFiles]** An array of file paths containing the data you wish to import.
 
 **returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Resolving callback will be passed an array of objects (1 for each file originally imported) that contain the `file` that was imported, as well
-as the `stdout` and `stderr` values.
+Resolving callback will be passed an object with two properties: `code` and `out`. The exit code from the import/export process will be the value of `code`, and `out` will contain general output. Note that `mongomimport` [natively sends status info to stderr rather than stdout](https://jira.mongodb.org/browse/DOCS-8817), so rather than be confusing, this output is attached to the `out` property of the object passed to the resolving function.
 
-### .export(collectionString OR [collectionStringArray])
-**collectionString:** Name of a collection within the database set by the `db` property of a mongonaut instance
-
-**[collectionStringArray]:** An array of strings that each match the name of a collection within the `db` property of the mongonaut instance.
+### .export(collectionString)
+**collectionString:** Name of a collection within the database set by the `db` property of a mongonaut instance.
 
 Note that an argument for `.export()` is optional, and will default to the collection set within the instnace's configured `collection` property.
 
 **returns:** [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Resolving callback will be passed an array of objects (1 for each collection originally exported) that contain the `collection` that was exported, as well
-as the `stdout` and `stderr` values.
+Resolving callback will be passed an object similar as done in `.import()` which contains properties `code` (the exit code) and `out` data sent to stderr.
+
+## Breaking in v3
+Previously, `mongonaut` took an array of files/collections. This has been removed in favor of only passing a single file/collection. It should be trivial to write one's own iterator over an array of files to replicate previous behavior if desired.
+
+Object passed to resolving promises have different properties (`out` and `code` rather than `file`, `stderr`, and `stdout`). This is largely due to the fact that `mongoimport` [does not send status info to stdout](https://jira.mongodb.org/browse/DOCS-8817).
 
 ## Run Tests
 In a terminal:
