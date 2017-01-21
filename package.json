@@ -39,6 +39,7 @@
     "ava": "^0.17.0",
     "nyc": "^10.0.0",
     "sinon": "^1.17.6",
+    "standard": "^8.6.0",
     "tap-nyan": "^1.1.0"
   },
   "dependencies": {
