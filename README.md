@@ -17,9 +17,9 @@ mongonaut.import('./data.json')
   });
 
 // change config to point to new collection
-// then batch import multiple files.
+// then import a new file
 mongonaut.set('collection', 'inventions');
-  .import(['./data2.json', './some/other/data.json', './third.json'])
+  .import('./data2.json')
   .then(function (response) {
       // code to fire on Promise resolve
   });
